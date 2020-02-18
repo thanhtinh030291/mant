@@ -38,7 +38,10 @@ define('DUPLICATED', 63);
 define('MEM_COUNT', 74);
 define('POCY_NO', 78);
 define('MBR_NO', 79);
+define('POCY_EFF_DATE', 80);
+define('RN_NP_STATUS', 84);
 define('DUPLICATED_WITH_CRM', 87);
+
 
 # Category Code
 define('CAT_APPLICATION', 26);

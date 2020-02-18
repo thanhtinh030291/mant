@@ -7,8 +7,8 @@ $g_window_title           = 'Health eTalk';
 $g_hostname               = 'localhost';
 $g_db_type                = 'mysqli';
 $g_database_name          = 'mantis_pcv';
-$g_db_username            = 'mantis_pcv';
-$g_db_password            = 'pIa9CDHJ2qCtIs0i';
+$g_db_username            = 'root';
+$g_db_password            = '';
 
 # --- Database Configuration ---
 $g_hbs_hostname           = '192.168.148.4';

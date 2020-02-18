@@ -112,12 +112,13 @@ function getProformaPolicies($hbs, $mts)
     foreach ($data->fetchAll(PDO::FETCH_ASSOC) as $item)
     {
         $ids = getRelatedMemberIds($mts, $item['pol_no']);
+        $format_pol_eff_date =  date("m/d/Y", strtotime($item['rn_np_status']));
         list($project, $reporter) = getProjectAndReporter($mts, $item['frln'], $item['brkr']);
         $policies[] = (object) [
             'membIds' => $ids,
             'broker' => $item['brkr'],
             'frontliner' => $item['frln'],
-            'summary' => "{$item['poho_name']} - {$item['pol_no']} - {$item['memb_count']} members",
+            'summary' => "{$item['rn_np_status']}({$format_pol_eff_date})-{$item['poho_name']} - {$item['pol_no']} - {$item['memb_count']} members",
             'description' => "{$item['poho_name']} - {$item['pol_no']} - {$item['memb_count']} members",
             'category' => 'Policy',
             'sticky' => false,

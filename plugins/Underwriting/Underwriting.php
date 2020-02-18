@@ -41,6 +41,13 @@ class UnderwritingPlugin extends MantisPlugin
 
     function onAddScript( $p_event )
     {
+        $field_mbr_name = MBR_NAME;
+        $field_poho_name = POHO_NAME;
+        echo "<style>
+            #custom_field_{$field_poho_name} , #custom_field_{$field_mbr_name} {
+             text-transform: uppercase;
+            }
+        </style>";
         echo '<script type="text/javascript" src="' . plugin_file( 'underwriting-v2.js' ) . '"></script>';
     }
 
@@ -131,11 +138,25 @@ class UnderwritingPlugin extends MantisPlugin
     }
 
     function autoSummary( $p_issue )
-    {
+    {   
+        
+        if(isset($p_issue->id)){
+            $t_rn_np_status = custom_field_get_value(RN_NP_STATUS,$p_issue->id);
+
+        }else{
+            $t_rn_np_status = "NEW";
+        }
+        
+
+        $t_pocy_eff_year = gpc_get_string( 'custom_field_' . POCY_EFF_DATE . "_year", '' );
+        $t_pocy_eff_month = gpc_get_string( 'custom_field_' . POCY_EFF_DATE . "_month", '' );
+        $t_pocy_eff_day = gpc_get_string( 'custom_field_' . POCY_EFF_DATE . "_day", '' );
+        
         if( strpos( $p_issue->summary, '[automatic]' ) === false ) {
             return $p_issue;
         }
-        
+        $t_status_np_rn =   $t_rn_np_status != null ?  $t_rn_np_status : null ;
+
         $t_mem_count = gpc_get_string( 'custom_field_' . MEM_COUNT, '' );
         if( $t_mem_count == '' ) {
             $t_mem_count = 'N/A';
@@ -164,7 +185,11 @@ class UnderwritingPlugin extends MantisPlugin
         if( $p_issue->category_id == CAT_APPLICATION ) {
             $p_issue->summary = "{$t_poho_name} - {$t_pocy_no} - {$t_mem_count} members - {$t_mbr_name} - {$t_mbr_no}";
         } elseif( $p_issue->category_id == CAT_POLICY ) {
-            $p_issue->summary = "{$t_poho_name} - {$t_pocy_no} - {$t_mem_count} members";
+            if( $t_rn_np_status == "NEW"){
+                $p_issue->summary = "{$t_poho_name} - {$t_pocy_no} - {$t_mem_count} members";
+            }else{
+                $p_issue->summary = "{$t_rn_np_status}({$t_pocy_eff_day}/{$t_pocy_eff_month}/{$t_pocy_eff_year})-{$t_poho_name} - {$t_pocy_no} - {$t_mem_count} members";
+            }
         }
         return $p_issue;
     }
