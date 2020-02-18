@@ -29,20 +29,7 @@ $t_this_page = plugin_page('import'); # FIXME with plugins this does not work...
 print_manage_menu($t_this_page);
 
 
-$t_id = gpc_get_string('id');
-//get data
-$t_query = 'SELECT 
-            br.id , name, code , user_id, project_id, broker_project_id
-        FROM brokers br
-        INNER JOIN broker_project bj
-        ON br.broker_project_id = bj.id
-        WHERE br.id =' .db_param();
 
-$t_result = db_query( $t_query,[$t_id] );
-$t_sponsors = [];
-while( $t_row = db_fetch_array( $t_result ) ) {
-	$t_sponsors[] = $t_row;
-}
 
 //get data all user
 $t_query = 'SELECT *
@@ -70,7 +57,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 
 <!-- USER INFO -->
 <div id="edit-user-div" class="form-container">
-	<form id="edit-user-form" method="post" action="plugin.php?page=UpdateBrokerAndFrontliner/editBrokerAction">
+	<form id="edit-user-form" method="post" action="plugin.php?page=UpdateBrokerAndFrontliner/createBrokerAction">
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
@@ -86,8 +73,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 		<fieldset>
 			<?php echo form_security_field( 'manage_boker_update' ) ?>
 			<!-- Title -->
-			<input type="hidden" name="id" value="<?php echo $t_sponsors[0]['id'] ?>" />
-			<input type="hidden" name="broker_project_id" value="<?php echo $t_sponsors[0]['broker_project_id'] ?>" />
+			
 
 			<!-- name -->
 			<tr>
@@ -117,13 +103,13 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 				<td>
 					<select id='userSelect' class="select" size="32" name="user_id" >
                         <?php foreach ($t_users as $key => $value) { ?>
-                            <option value="<?= $value['id']?>" <?= $t_sponsors[0]['user_id'] == $value['id'] ? 'selected' : "" ?>> <?= $value['username']?> </option>
+                            <option value="<?= $value['id']?>" > <?= $value['username']?> </option>
                         <?php } ?>
                     </select>
 
                     <select id='projectSelect' class="select" size="32" name="project_id" >
                         <?php foreach ($t_projects as $key => $value) { ?>
-                            <option value="<?= $value['id']?>" <?= $t_sponsors[0]['project_id'] == $value['id'] ? 'selected' : "" ?>> <?= $value['name']?> </option>
+                            <option value="<?= $value['id']?>"> <?= $value['name']?> </option>
                         <?php } ?>
                     </select>
 				</td>
@@ -136,12 +122,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo plugin_lang_get( 'submit' ) ?>" />
 		</div>
 	</form>
-    <div class="widget-toolbox padding-8 clearfix">
-        <form  method="post" action="plugin.php?page=UpdateBrokerAndFrontliner/deleteBrokerAction">
-            <input type="hidden" name="id" value="<?php echo $t_sponsors[0]['id'] ?>" />
-            <input type="submit" class="btn btn-danger " value="<?php echo plugin_lang_get( 'delete' ) ?>" />
-        </form>
-    </div>
+    
 </div>
 <div class="space-10"></div>
 

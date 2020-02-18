@@ -32,11 +32,11 @@ print_manage_menu($t_this_page);
 $t_id = gpc_get_string('id');
 //get data
 $t_query = 'SELECT 
-            br.id , name, code , user_id, project_id, broker_project_id
-        FROM brokers br
+            fl.id , name, code , user_id, project_id, broker_project_id
+        FROM frontliners fl
         INNER JOIN broker_project bj
-        ON br.broker_project_id = bj.id
-        WHERE br.id =' .db_param();
+        ON fl.broker_project_id = bj.id
+        WHERE fl.id =' .db_param();
 
 $t_result = db_query( $t_query,[$t_id] );
 $t_sponsors = [];
@@ -70,12 +70,12 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 
 <!-- USER INFO -->
 <div id="edit-user-div" class="form-container">
-	<form id="edit-user-form" method="post" action="plugin.php?page=UpdateBrokerAndFrontliner/editBrokerAction">
+	<form id="edit-user-form" method="post" action="plugin.php?page=UpdateBrokerAndFrontliner/editFrontlinerAction">
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<i class="ace-icon fa fa-user"></i>
-					<?php echo plugin_lang_get('manage_broker_title') ?>
+					<?php echo plugin_lang_get('manage_frontliner_title') ?>
 				</h4>
 			</div>
 		<div class="widget-body">
@@ -92,7 +92,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 			<!-- name -->
 			<tr>
 				<td class="category">
-					<?php echo plugin_lang_get( 'broker_name' ) ?>
+					<?php echo plugin_lang_get( 'frontliner_name' ) ?>
 				</td>
 				<td>
 					<input type="text" class="uppercase input-sm" size="32" name="name" value="<?php echo $t_sponsors[0]['name'] ?>" />
@@ -102,7 +102,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
             <!-- code -->
 			<tr>
 				<td class="category">
-					<?php echo plugin_lang_get( 'broker_code' ) ?>
+					<?php echo plugin_lang_get( 'frontliner_code' ) ?>
 				</td>
 				<td>
 					<input type="text" class="input-sm" size="32" name="code" value="<?php echo $t_sponsors[0]['code'] ?>" />
@@ -137,7 +137,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 		</div>
 	</form>
     <div class="widget-toolbox padding-8 clearfix">
-        <form  method="post" action="plugin.php?page=UpdateBrokerAndFrontliner/deleteBrokerAction">
+        <form  method="post" action="plugin.php?page=UpdateBrokerAndFrontliner/deleteFrontlinerAction">
             <input type="hidden" name="id" value="<?php echo $t_sponsors[0]['id'] ?>" />
             <input type="submit" class="btn btn-danger " value="<?php echo plugin_lang_get( 'delete' ) ?>" />
         </form>

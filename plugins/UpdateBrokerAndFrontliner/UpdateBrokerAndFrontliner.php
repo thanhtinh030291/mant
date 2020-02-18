@@ -23,11 +23,21 @@ class UpdateBrokerAndFrontlinerPlugin extends MantisPlugin
 
     function onAddScript( $p_event )
     {
-       
+        echo "<style>
+            .uppercase {
+                text-transform: uppercase;
+                }
+        </style>";
+        
+        ";
+
     }
 
     function import_issues_menu() {
-        return array( '<a href="' . plugin_page( 'indexBroker' ) . '">' . plugin_lang_get('manage_broker_title') . '</a>', );
+        return [ 
+            '<a href="' . plugin_page( 'indexBroker' ) . '">' . plugin_lang_get('manage_broker_title') . '</a>', 
+            '<a href="' . plugin_page( 'indexFrontliner' ) . '">' . plugin_lang_get('manage_frontliner_title') . '</a>', 
+        ];
         
 	}
 }

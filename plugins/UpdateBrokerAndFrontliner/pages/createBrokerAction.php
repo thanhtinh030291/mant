@@ -1,11 +1,10 @@
 <?php
 
-$f_id	= gpc_get_string( 'id' );
+
 $f_name		= gpc_get_string( 'name' );
 $f_code		= gpc_get_string( 'code' );
 $f_user_id	= gpc_get_string( 'user_id', '');
 $f_project_id	= gpc_get_string( 'project_id', '');
-$f_broker_project_id = gpc_get_string( 'broker_project_id', '');
 
 $t_query = 'SELECT *
         FROM broker_project
@@ -27,10 +26,10 @@ if($data_broker_project == false){
 }
 
 	# Execute a 2nd query while the 1st is still being built
-$t_query = 'UPDATE brokers
-			SET code=' . db_param() . ', name=' . db_param() . ' ,
-				broker_project_id=' . db_param() . ' WHERE id=' . db_param();
-$t_query_params = array( $f_code, $f_name, $data_broker_project['id'], $f_id );
+$t_query = 'INSERT INTO brokers
+			(code, name, broker_project_id)
+			VALUES ('.db_param().','.db_param().','.db_param().')';
+$t_query_params = array( $f_code, $f_name, $data_broker_project['id']);
 $t_result = db_query( $t_query, $t_query_params );
 
 $t_redirect_url = '/plugin.php?page=UpdateBrokerAndFrontliner/indexBroker';

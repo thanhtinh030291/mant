@@ -47,7 +47,7 @@ if (ALL_PROJECTS == $t_project_id) {
 
 //get data
 $t_query = 'SELECT *
-        FROM brokers
+        FROM frontliners
     ';
 $t_result = db_query( $t_query,[] );
 $t_sponsors = [];
@@ -58,7 +58,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 ?>
 <div class = "space-10"></div>
 <div class="pull-right">
-	<?php print_link_button( 'plugin.php?page=UpdateBrokerAndFrontliner/createBroker', plugin_lang_get('create') ,'btn-md' ) ?>
+	<?php print_link_button( 'plugin.php?page=UpdateBrokerAndFrontliner/createFrontliner', plugin_lang_get('create') ,'btn-md' ) ?>
 </div>
 <div class="col-md-12 col-xs-12">
 <div class = "space-10"></div>
@@ -67,13 +67,13 @@ while( $t_row = db_fetch_array( $t_result ) ) {
     <div class="widget-header widget-header-small">
         <h4 class="widget-title lighter">
             <i class="ace-icon fa fa-users"></i>
-            <?php echo plugin_lang_get('manage_broker_title') ?>
+            <?php echo plugin_lang_get('manage_frontliner_title') ?>
             <span class="badge"><?php echo $t_total_user_count ?></span>
         </h4>
     </div>
     <div class="widget-main no-padding">
 	<div class="table-responsive">
-		<table class="table table-striped table-bordered table-condensed table-hover datatable">
+		<table id="datatable" class="table table-striped table-bordered table-condensed table-hover ">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -86,7 +86,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
                     <tr>
                         <td><?= $value['id'] ?></td>
                         <td><?= $value['code'] ?></td>
-                        <td><a href="plugin.php?page=UpdateBrokerAndFrontliner/editBroker&id=<?php echo $value['id'] ?>"><?php echo $value['name'] ?></a></td>
+                        <td><a href="plugin.php?page=UpdateBrokerAndFrontliner/editFrontliner&id=<?php echo $value['id'] ?>"><?php echo $value['name'] ?></a></td>
                     </tr>
                 <?php } ?>
             </tbody>

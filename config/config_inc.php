@@ -8,7 +8,7 @@ $g_hostname               = 'localhost';
 $g_db_type                = 'mysqli';
 $g_database_name          = 'mantis_pcv';
 $g_db_username            = 'root';
-$g_db_password            = '';
+$g_db_password            = 'Ngonlua@1';
 
 # --- Database Configuration ---
 $g_hbs_hostname           = '192.168.148.4';

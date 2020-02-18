@@ -46,8 +46,14 @@
 
 $s_plugin_UpdateBrokerAndFrontliner_submit = 'Submit';
 $s_plugin_UpdateBrokerAndFrontliner_delete = 'Delete';
+$s_plugin_UpdateBrokerAndFrontliner_create = 'Create';
 $s_plugin_UpdateBrokerAndFrontliner_manage_broker_title = 'Brokers Management';
 $s_plugin_UpdateBrokerAndFrontliner_broker_name = 'Broker Name';
 $s_plugin_UpdateBrokerAndFrontliner_broker_code = 'Broker Code';
-$s_plugin_UpdateBrokerAndFrontliner_broker_code = 'Broker Code';
 $s_plugin_UpdateBrokerAndFrontliner_project_id = 'Project Id';
+
+
+$s_plugin_UpdateBrokerAndFrontliner_manage_frontliner_title = 'Frontliners Management';
+$s_plugin_UpdateBrokerAndFrontliner_frontliner_name = 'Frontliner Name';
+$s_plugin_UpdateBrokerAndFrontliner_frontliner_code = 'Frontliner Code';
+
