@@ -29,8 +29,6 @@ class UpdateBrokerAndFrontlinerPlugin extends MantisPlugin
                 }
         </style>";
         
-        ";
-
     }
 
     function import_issues_menu() {
